@@ -1,0 +1,24 @@
+<% provide(:title, "ログイン") %>
+<h1>ログイン</h1>
+<div class="login-form">
+  <% if @error_messages.present? %>
+    <ul class="error-messages">
+      <% @error_messages.each do |message| %>
+          <li>
+            <%= message %>
+          </li>
+      <% end %>
+    </ul>
+  <% end %>
+  <%= form_for(:session, url: login_path, local: true) do |f| %>
+    <div>
+      <%= f.label 'ユーザーID' %>
+      <%= f.text_field :login_id, id: 'user_login_id' %>
+    </div>
+    <div>
+      <%= f.label 'パスワード' %>
+      <%= f.password_field :password, id: 'user_password' %>
+    </div>
+    <%= f.submit 'ログイン', class: 'btn btn-primary' %>
+  <% end %>
+</div>
