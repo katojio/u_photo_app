@@ -1,0 +1,29 @@
+<%= link_to 'ログアウト', logout_path, method: :delete %>
+
+<h1>写真アップロード</h1>
+
+<% if @error_messages.present? %>
+  <ul class="error-messages">
+    <% @error_messages.each do |message| %>
+        <li>
+          <%= message %>
+        </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: @user_photo, url: photos_path, method: :post do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title, id: 'user_photo_title' %>
+  </div>
+
+  <div>
+    <%= f.label :photo %>
+    <%= f.file_field :photo, id: 'user_photo_photo' %>
+  </div>
+
+  <%= f.button 'アップロード', type: :submit %>
+<% end %>
+
+<%= link_to 'キャンセル', photos_path %>
