@@ -1,3 +1,10 @@
-<h1>Photos#index</h1>
-
 <%= link_to 'ログアウト', logout_path, method: :delete %>
+
+<h1>写真一覧</h1>
+
+<%= link_to '写真をアップロードする', new_photo_path %>
+
+<% @user_photos.each do |user_photo| %>
+  <div><%= user_photo.title %></div>
+  <div><%= image_tag(user_photo.photo) %></div>
+<% end %>
