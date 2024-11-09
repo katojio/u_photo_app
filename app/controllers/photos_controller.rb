@@ -1,6 +1,7 @@
 class PhotosController < ApplicationController
   def index
     @user_photos = current_user.user_photos.order(created_at: :desc)
+    @tweetable = session[:access_token].present?
   end
 
   def new
@@ -16,6 +17,15 @@ class PhotosController < ApplicationController
       @error_messages = user_photo.errors.full_messages
       @user_photo = current_user.user_photos.build
       render 'new'
+    end
+  end
+
+  def tweets
+    request_builder = TweetUrlRequestBuilder.new(params:, access_token: session[:access_token])
+    uri = request_builder.uri
+
+    Net::HTTP.start(uri.host, uri.port) do |http|
+      http.request(request_builder.call)
     end
   end
 

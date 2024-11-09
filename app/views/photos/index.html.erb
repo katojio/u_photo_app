@@ -2,9 +2,18 @@
 
 <h1>写真一覧</h1>
 
-<%= link_to '写真をアップロードする', new_photo_path %>
+<div>
+  <%= link_to 'MyTweetAppと連携', oauth_authorize_path %>
+</div>
+
+<div>
+  <%= link_to '写真をアップロードする', new_photo_path %>
+</div>
 
 <% @user_photos.each do |user_photo| %>
   <div><%= user_photo.title %></div>
   <div><%= image_tag(user_photo.photo) %></div>
+  <% if @tweetable %>
+    <%= button_to 'ツイートする', photo_tweets_path(user_photo) %>
+  <% end %>
 <% end %>
