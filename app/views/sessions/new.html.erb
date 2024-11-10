@@ -2,13 +2,13 @@
 <h1>ログイン</h1>
 <div class="login-form">
   <%= render partial: 'shared/error_messages', locals: { messages: @error_messages } %>
-  <%= form_for(:session, url: login_path, local: true) do |f| %>
+  <%= form_with model: @user, url: login_path, method: :post do |f| %>
     <div>
-      <%= f.label 'ユーザーID' %>
+      <%= f.label :login_id %>
       <%= f.text_field :login_id, id: 'user_login_id' %>
     </div>
     <div>
-      <%= f.label 'パスワード' %>
+      <%= f.label :password %>
       <%= f.password_field :password, id: 'user_password' %>
     </div>
     <%= f.submit 'ログイン', class: 'btn btn-primary' %>

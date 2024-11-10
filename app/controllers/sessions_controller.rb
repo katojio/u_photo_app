@@ -1,12 +1,13 @@
 class SessionsController < ApplicationController
   skip_before_action :check_if_logged_in_user
+  before_action :set_user, only: [:new, :create]
 
   def new
   end
 
   def create
-    login_id = params[:session][:login_id]
-    password = params[:session][:password]
+    login_id = user_params[:login_id]
+    password = user_params[:password]
 
     user = User.new(login_id:, password:)
     user.valid?
@@ -27,6 +28,14 @@ class SessionsController < ApplicationController
   def destroy
     log_out
     redirect_to login_url
+  end
+
+  private def set_user
+    @user = User.new
+  end
+
+  private def user_params
+    params.require(:user).permit(:login_id, :password)
   end
 
   private def blank_message(user, attr)
