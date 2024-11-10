@@ -1,6 +1,9 @@
 ja:
   activerecord:
     attributes:
+      user:
+        login_id: ユーザーID
+        password: パスワード
       user_photo:
         title: タイトル
         photo: 画像ファイル

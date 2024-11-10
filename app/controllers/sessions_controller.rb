@@ -5,17 +5,31 @@ class SessionsController < ApplicationController
   end
 
   def create
-    login = Login.new(login_id: params[:session][:login_id], password: params[:session][:password])
+    login_id = params[:session][:login_id]
+    password = params[:session][:password]
 
-    @error_messages = login_error_messages(login.errors)
+    user = User.new(login_id:, password:)
+    user.valid?
+
+    @error_messages = [blank_message(user, :login_id), blank_message(user, :password)].compact
     return render 'new' if @error_messages.present?
 
-    log_in login.user
-    redirect_to photos_path
+    login_user = User.find_by(login_id:)
+    if login_user&.authenticate(password)
+      log_in login_user
+      redirect_to photos_path
+    else
+      @error_messages = ['ログインに失敗しました。再度入力してください']
+      render 'new'
+    end
   end
 
   def destroy
     log_out
     redirect_to login_url
+  end
+
+  private def blank_message(user, attr)
+    user.errors.where(attr, :blank)[0]&.full_message
   end
 end
