@@ -21,7 +21,7 @@ class PhotosController < ApplicationController
   end
 
   def tweets
-    request_builder = TweetUrlRequestBuilder.new(params:, access_token: session[:access_token])
+    request_builder = TweetRequestBuilder.new(params:, access_token: session[:access_token])
     uri = request_builder.uri
 
     Net::HTTP.start(uri.host, uri.port) do |http|
