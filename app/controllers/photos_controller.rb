@@ -27,6 +27,8 @@ class PhotosController < ApplicationController
     Net::HTTP.start(uri.host, uri.port) do |http|
       http.request(request_builder.call)
     end
+
+    redirect_to photos_path
   end
 
   private def user_photo_params
