@@ -1,14 +1,4 @@
 module SessionsHelper
-  LOGIN_ERROR_MESSAGES = {
-    blank_user_id: 'ユーザーIDを入力してください',
-    blank_password: 'パスワードを入力してください',
-    wrong_login_info: 'ログインに失敗しました。再度入力してください'
-  }.freeze
-
-  def login_error_messages(keys)
-    keys.map { LOGIN_ERROR_MESSAGES[_1] }
-  end
-
   def log_in(user)
     session[:user_id] = user.id
   end

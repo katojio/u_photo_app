@@ -2,15 +2,7 @@
 
 <h1>写真アップロード</h1>
 
-<% if @error_messages.present? %>
-  <ul class="error-messages">
-    <% @error_messages.each do |message| %>
-        <li>
-          <%= message %>
-        </li>
-    <% end %>
-  </ul>
-<% end %>
+<%= render partial: 'shared/error_messages', locals: { messages: @error_messages } %>
 
 <%= form_with model: @user_photo, url: photos_path, method: :post do |f| %>
   <div>

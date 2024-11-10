@@ -1,4 +1,4 @@
-class TweetUrlRequestBuilder
+class TweetRequestBuilder
   URL = 'http://unifa-recruit-my-tweet-app.ap-northeast-1.elasticbeanstalk.com/api/tweets'.freeze
 
   attr_reader :uri

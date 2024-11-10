@@ -1,0 +1,9 @@
+<% if messages.present? %>
+  <ul class="error-messages">
+    <% messages.each do |message| %>
+        <li>
+          <%= message %>
+        </li>
+    <% end %>
+  </ul>
+<% end %>
