@@ -6,8 +6,6 @@ class UserPhoto < ApplicationRecord
   validate :check_photo
 
   private def check_photo
-    if photo.blank?
-      errors.add(:base, '画像ファイルを入力してください')
-    end
+    errors.add(:photo, :blank) if photo.blank?
   end
 end
